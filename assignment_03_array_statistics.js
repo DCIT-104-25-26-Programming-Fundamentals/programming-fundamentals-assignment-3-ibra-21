@@ -42,5 +42,70 @@
 // =============================================================================
 // YOUR CODE BELOW — remove the // symbols from the scaffold and fill it in
 // =============================================================================
+const readline = require('readline-sync');
 
+function calculateSum(numbers) {
+    let sum = 0;
+    for (let i = 0; i < numbers.length; i++) {
+        sum += numbers[i];
+    }
+    return sum;
+}
+
+function calculateAverage(numbers) {
+    if (numbers.length === 0) return 0;
+    return calculateSum(numbers) / numbers.length;
+}
+
+function calculateMax(numbers) {
+    let max = numbers[0];
+    for (let i = 1; i < numbers.length; i++) {
+        if (numbers[i] > max) {
+            max = numbers[i];
+        }
+    }
+    return max;
+}
+
+function calculateMin(numbers) {
+    let min = numbers[0];
+    for (let i = 1; i < numbers.length; i++) {
+        if (numbers[i] < min) {
+            min = numbers[i];
+        }
+    }
+    return min;
+}
+
+function main() {
+    const countInput = readline.question('How many numbers? ');
+    const count = parseInt(countInput, 10);
+
+    if (isNaN(count) || count <= 0) {
+        console.log('Error: Please enter a positive integer greater than zero.');
+        return;
+    }
+
+    const numbers = [];
+
+    for (let i = 0; i < count; i++) {
+        const input = readline.question(`Enter number ${i + 1}: `);
+        const value = Number(input);
+
+        if (isNaN(value)) {
+            console.log('Error: Invalid input. Please enter a valid number.');
+            return;
+        }
+
+        numbers.push(value);
+    }
+
+    console.log('\nResults:');
+    console.log(`Sum:     ${calculateSum(numbers)}`);
+    console.log(`Average: ${calculateAverage(numbers)}`);
+    console.log(`Maximum: ${calculateMax(numbers)}`);
+    console.log(`Minimum: ${calculateMin(numbers)}`);
+}
+
+main();
 
